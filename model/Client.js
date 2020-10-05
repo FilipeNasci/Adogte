@@ -6,6 +6,12 @@ const Client = sequelize.define('Client', {
     name: {
         type: DataTypes.STRING,
     },
+    login: {
+        type: DataTypes.STRING,
+    },
+    password: {
+        type: DataTypes.STRING,
+    },
     birthday: {
         type: DataTypes.STRING,
     },
