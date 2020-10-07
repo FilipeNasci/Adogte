@@ -1,10 +1,12 @@
 const Client = require('../model/Client');
 
 const registerClient = async (req, res) => {
+    Client.beforeCreate(function(client, options){
+        client.req = req;
+    });
+    
     await Client.create({
         name: req.body.name,
-        login: req.body.login,
-        password: req.body.password,
         birthday: req.body.birthday,
         phone: req.body.phone,
         address: req.body.address,

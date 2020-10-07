@@ -1,15 +1,10 @@
 const DataTypes = require("../db/db").DataTypes;
 const sequelize = require("../db/db").sequelize;
+const User = require('./User');
 
 
 const Client = sequelize.define('Client', {
     name: {
-        type: DataTypes.STRING,
-    },
-    login: {
-        type: DataTypes.STRING,
-    },
-    password: {
         type: DataTypes.STRING,
     },
     birthday: {
@@ -31,6 +26,15 @@ const Client = sequelize.define('Client', {
         type: DataTypes.INTEGER
     }
 })
+
+Client.addHook('afterCreate', async (client) => {
+    await User.create({
+        clientId: client.id,
+        login: client.req.body.login,
+        password: client.req.body.password,
+        type: 'client'
+    })
+});
 
 Client.sync({ force: false });
 
