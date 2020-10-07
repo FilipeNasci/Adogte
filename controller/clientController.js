@@ -1,4 +1,5 @@
 const Client = require('../model/Client');
+const User = require('../model/User');
 
 const registerClient = async (req, res) => {
     Client.beforeCreate(function(client, options){
