@@ -1,5 +1,4 @@
 const Client = require('../model/Client');
-const Cliente = require('../model/Client');
 
 const registerClient = async (req, res) => {
     await Client.create({
@@ -13,9 +12,9 @@ const registerClient = async (req, res) => {
         people: parseInt(req.body.people),
         animals: parseInt(req.body.animals),
     }).then(response => {
-        res.status(201).redirect('/');
+        return res.status(201).json({ message: 'Cadastro realizado com sucesso!' });
     }).catch(error => {
-        res.status(500).send(error);
+        return res.status(500).send(error);
     })
 }
 
